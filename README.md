@@ -3,7 +3,8 @@ Comic Book Value Criteria
 Pros
 
 1. Look for first appearances of seminal characters.
-   - Return all first appearances of characters in a series (/
+   - Return all first appearances of characters in a series
+   - /api/search/?api_key=[key]&format=json&resources=issue&query=batman
 
 2. Consider the age of the comic book. Older comic books are more because of their age and relative rarity to newer comics. 
    Comics published during the Platinum and Golden Ages are particularly valuable.
