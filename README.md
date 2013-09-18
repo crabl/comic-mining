@@ -5,6 +5,9 @@ Pros
 1. Look for first appearances of seminal characters.
    - Return all first appearances of characters in a series
    - /api/search/?api_key=[key]&format=json&resources=issue&query=batman
+   comic_list = []
+   for(book in series):
+      comic_list += [ComicModel(series.name, book.title)]
 
 2. Consider the age of the comic book. Older comic books are more because of their age and relative rarity to newer comics. 
    Comics published during the Platinum and Golden Ages are particularly valuable.
@@ -24,3 +27,4 @@ Cons
 3. Shipping new comics pre-bagged.
 4. Gimmick covers.
 
+From: http://www.wikihow.com/Buy-and-Sell-Comic-Books (I know, shitty source, but you have to start somewhere...)
