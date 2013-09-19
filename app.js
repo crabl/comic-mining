@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 // Express Stuff
 var express = require('express');
 var http = require('http');
@@ -11,8 +6,8 @@ var fs = require('fs');
 
 // App-Specific 
 var globals = require('./config');
-var ComicModel = require('./models/comic');
-var search = require('./routes/search');
+var ComicModel = require('./models/ComicModel');
+var SearchApp = require('./routes/SearchApp');
 var app = express();
 
 // all environments
@@ -30,12 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
-app.get('/', search.index);
-//app.get('/users', user.list);
-app.get('/character/:name', search.getCharacter);
+app.get('/', SearchApp.index);
+app.get('/character/:name', SearchApp.getCharacter);
+app.get('/issue/:number', SearchApp.getFirstAppearanceIssues);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

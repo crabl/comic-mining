@@ -9,24 +9,26 @@ block content
 
   - for(i = 0; i < cv.results.length; i++)
     div
-      h2 #{cv.results[i].name}
+      - if(cv.results[i].volume.name)
+        h2 #{cv.results[i].volume.name}
+      - else
+        h2 Volume Name Not Available
 
       - if(cv.results[i].image)
         img.search-icon-image(src='#{cv.results[i].image.icon_url}')
       - else
         div.search-icon-image
 
-      - if(cv.results[i].real_name)
-        p Real Name: #{cv.results[i].real_name}
+      - if(cv.results[i].cover_date)
+        p Cover Date: #{cv.results[i].cover_date}
       - else
-        p Real Name: Unknown
+        p Cover Date: Unknown
 
-      p Appears in <strong>#{cv.results[i].count_of_issue_appearances}</strong> issues
-
-      - if(cv.results[i].first_appeared_in_issue)
-        p First appeared in issue ##{cv.results[i].first_appeared_in_issue.issue_number} - "#{cv.results[i].first_appeared_in_issue.name}"
+      - if(cv.results[i].issue_number)
+        p Issue Number: #{cv.results[i].issue_number}
       - else
-        p First appearance unknown
+        p Issue Number: Unknown
+
 
 block scripts
   script(type='text/javascript', src='http://codeorigin.jquery.com/jquery-2.0.3.min.js').
