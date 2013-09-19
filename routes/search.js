@@ -3,16 +3,20 @@ var globals = require('../config.js');
 var sanitize = require('validator').sanitize,
     check = require('validator').check;
 
+var sane = function(input) {
+	return encodeURIComponent(input).replace(/%20/g, '+');
+}
+
 /* Main search page */
 exports.index = function(req, res) {
-    res.render('index', {title: 'Comic Book API Search'});
+    res.render('character', {title: 'Comic Book API Search', cv : { results: []}});
 };
 
 /* Get aliases of character */
 exports.getCharacter = function(req, res){
   var options = {
     host : globals.COMICVINE_API_ROOT,
-    path : '/api/search?api_key=' + globals.COMICVINE_API_KEY + '&format=json&resources=character&query=' + req.param('name'),
+    path : '/api/search?api_key=' + globals.COMICVINE_API_KEY + '&format=json&resources=character&query=' + sane(req.param('name')),
     port : 80,
     method : 'GET'
   }
@@ -23,7 +27,7 @@ exports.getCharacter = function(req, res){
       body += data;
     });
     response.on('end', function() {
-      res.render('character', {comicvine: JSON.parse(body)});
+      res.render('character', {cv: JSON.parse(body), title: "Search results for " + sane(req.param('name'))});
     });
   });
   request.on('error', function(e) {

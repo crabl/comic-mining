@@ -6,3 +6,15 @@ body {
 a {
   color: #00B7FF;
 }
+
+.search-icon-image {
+    width: 80px;
+    height: 80px;
+    background: #999;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+h2 {
+    clear: both;
+}
