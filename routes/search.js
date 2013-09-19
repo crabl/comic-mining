@@ -27,7 +27,7 @@ exports.getCharacter = function(req, res){
       body += data;
     });
     response.on('end', function() {
-      res.render('character', {cv: JSON.parse(body), title: "Search results for " + sane(req.param('name'))});
+      res.render('character', {cv: JSON.parse(body), title: "Search results for " + sane(req.param('name')).replace(/%2B/g, ' ')});
     });
   });
   request.on('error', function(e) {
