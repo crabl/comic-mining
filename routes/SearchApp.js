@@ -63,3 +63,33 @@ exports.getFirstAppearanceIssues = function(req, res) {
     request.end();  
 };
 
+exports.getTestPage = function(req, res) {
+    res.render('AJAXSearchTest', {title: 'AJAX Search Test'});
+};
+
+exports.postTestSearch = function(req, res) {
+    var options = {
+        host : globals.COMICVINE_API_ROOT,
+        path : '/api/search?api_key=' + globals.COMICVINE_API_KEY + '&format=json&resources=character&query=' + sane(req.param('term')),
+        port : 80,
+        method : 'GET'
+    }
+
+    console.log(options.path);
+
+    var request = http.request(options, function(response){
+        var body = ""
+        response.on('data', function(data) {
+            body += data;
+        });
+        response.on('end', function() {
+            res.send(JSON.parse(body));
+        });
+    });
+
+    request.on('error', function(e) {
+        console.log('Problem with request: ' + e.message);
+    });
+
+    request.end();
+};

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1 AJAX Search Test
+  form.searchForm(action='')
+    input.searchTerm(type='text')
+    input(type='submit', value='Go')
+
+  div#results
+    p Result: 
+
+block scripts
+  script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js').
+  script(type='text/javascript', src='/javascripts/controllers/PageLoadController.js').
+  script(type='text/javascript').
+    $('.searchForm').submit(function(event) {
+      $('div#results').empty();
+      var plc = new PageLoadController();
+      plc.ajaxPostLoader('/searchTest', {term: $('.searchTerm').val()}, function() { 
+        $('div#results').append('<p>Success!</p>');
+      }, function() { 
+        $('div#results').append('<p>Fail!</p>');
+      });
+      event.preventDefault();
+    });

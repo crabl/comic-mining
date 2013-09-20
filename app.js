@@ -31,6 +31,8 @@ if ('development' == app.get('env')) {
 app.get('/', SearchApp.index);
 app.get('/character/:name', SearchApp.getCharacter);
 app.get('/issue/:number', SearchApp.getFirstAppearanceIssues);
+app.get('/searchTest', SearchApp.getTestPage);
+app.post('/searchTest', SearchApp.postTestSearch);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

@@ -15,8 +15,9 @@ var PageLoadController = function() {
 
     this.ajaxPostLoader = function(url, data, successCallback, failCallback) {
 	this.showPageLoader();
-	this.ajaxPostRequest(url, data, successCallback, failCallback);
-	this.hidePageLoader();
+	var plcInstance = this;
+	this.ajaxPostRequest(url, data, function(data) { successCallback(data); plcInstance.hidePageLoader(); }, failCallback);
+	//this.hidePageLoader();
     };
     
     this.ajaxGetRequest = function(url, data, successCallback, failCallback) {
@@ -35,16 +36,23 @@ var PageLoadController = function() {
 
     this.ajaxGetLoader = function(url, data, successCallback, failCallback) {
 	this.showPageLoader();
-	this.ajaxGetRequest(url, data, successCallback, failCallback);
-	this.hidePageLoader();
+	var plcInstance = this;
+
+        this.ajaxGetRequest(url, data, function(data) { 
+            successCallback(data); 
+            plcInstance.hidePageLoader(); 
+        }, function(data) {
+            failCallback(data);
+            plcInstance.hidePageLoader();
+        });
     };
 
     this.showPageLoader = function() {
-
+	$("div#loader").fadeIn();
     };
 
     this.hidePageLoader = function() {
-
+	$("div#loader").fadeOut();
     };
 
     
