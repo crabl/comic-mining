@@ -21,4 +21,7 @@ h2 {
 
 #loader {
     display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
