@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 AJAX Search Test
+  h1 Character Search Test
   form.searchForm(action='')
     input.searchTerm(type='text')
     input(type='submit', value='Go')
@@ -12,12 +12,15 @@ block content
 block scripts
   script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js').
   script(type='text/javascript', src='/javascripts/controllers/PageLoadController.js').
+  script(type='text/javascript', src='/javascripts/controllers/CharacterSearchController.js').
   script(type='text/javascript').
     $('.searchForm').submit(function(event) {
       $('div#results').empty();
       var plc = new PageLoadController();
-      plc.ajaxPostLoader('/searchTest', {term: $('.searchTerm').val()}, function() { 
-        $('div#results').append('<p>Success!</p>');
+      var csc = new CharacterSearchController();
+      plc.ajaxPostLoader('/searchTest', {term: $('.searchTerm').val()}, function(data) { 
+        // console.log(data);
+        csc.showSearchResults(data);
       }, function() { 
         $('div#results').append('<p>Fail!</p>');
       });
