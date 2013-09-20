@@ -28,3 +28,17 @@ Cons
 4. Gimmick covers.
 
 From: http://www.wikihow.com/Buy-and-Sell-Comic-Books (I know, shitty source, but you have to start somewhere...)
+
+
+Installation
+------------
+
+1. Sign up for an API key at ComicVine (http://www.comicvine.com/api/)
+2. Create config.js containing the following information:
+```
+exports.EXPRESS_SECRET = '[GENERATE AN EXPRESS SECRET TOKEN]';
+exports.COMICVINE_API_ROOT = 'www.comicvine.com';
+exports.COMICVINE_API_KEY = '[YOUR COMICVINE API KEY]';
+```
+3. npm install
+4. Run!
