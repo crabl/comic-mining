@@ -1,5 +1,7 @@
 Comic Book Value Criteria
 -------------------------
+This project is deprecated in favor of the "datamining" repo
+
 Pros
 
 1. Look for first appearances of seminal characters.
